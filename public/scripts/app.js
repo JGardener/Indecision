@@ -7,9 +7,20 @@ console.log("app.js is running!");
 // into those templates. JSX makes it easy to work with those templates.
 
 var template = React.createElement(
-  "h1",
+  "div",
   null,
-  "Ahoy hoy"
+  React.createElement(
+    "h2",
+    null,
+    "This is coming from src/app.js - it is then being compiled by",
+    React.createElement("br", null),
+    "public/scripts/app.js into vanilla JS for the browser to read."
+  ),
+  React.createElement(
+    "p",
+    null,
+    "This is some extra information"
+  )
 );
 
 var appRoot = document.getElementById('app');
