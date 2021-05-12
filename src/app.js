@@ -12,6 +12,10 @@ var template = (
       public/scripts/app.js into vanilla JS for the browser to read.
     </h2>
     <p>This is some extra information</p>
+    <ol>
+      <li>Item One</li>
+      <li>Item Two</li>
+    </ol>
   </div>
 );
 

@@ -20,6 +20,20 @@ var template = React.createElement(
     "p",
     null,
     "This is some extra information"
+  ),
+  React.createElement(
+    "ol",
+    null,
+    React.createElement(
+      "li",
+      null,
+      "Item One"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "Item Two"
+    )
   )
 );
 
