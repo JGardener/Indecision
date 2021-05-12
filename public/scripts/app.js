@@ -6,20 +6,23 @@ console.log("app.js is running!");
 // A Javascript language extension provided by React - defines templates and injects data
 // into those templates. JSX makes it easy to work with those templates.
 
+var textObject = {
+  title: "Application Title",
+  subtitle: "Application Subtitle"
+};
+
 var template = React.createElement(
   "div",
   null,
   React.createElement(
     "h2",
     null,
-    "This is coming from src/app.js - it is then being compiled by",
-    React.createElement("br", null),
-    "public/scripts/app.js into vanilla JS for the browser to read."
+    textObject.title
   ),
   React.createElement(
     "p",
     null,
-    "This is some extra information"
+    textObject.subtitle
   ),
   React.createElement(
     "ol",
@@ -37,6 +40,35 @@ var template = React.createElement(
   )
 );
 
+var user = {
+  name: "James Gardener",
+  age: 28,
+  location: "England"
+};
+
+var templateTwo = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Name: ",
+    user.name
+  ),
+  React.createElement(
+    "p",
+    null,
+    "Age: ",
+    user.age
+  ),
+  React.createElement(
+    "p",
+    null,
+    "Location: ",
+    user.location
+  )
+);
+
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
