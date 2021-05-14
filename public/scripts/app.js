@@ -2,169 +2,93 @@
 
 console.log("app.js is running!");
 
-// JSX - Javascript XML
-// A Javascript language extension provided by React - defines templates and injects data
-// into those templates. JSX makes it easy to work with those templates.
-
+// Setting up a form
 var appInfo = {
   title: "Application Title",
   subtitle: "Application Subtitle",
-  options: ["One", "Two"]
+  options: []
+};
+var getOptions = function getOptions(subtitle) {
+  return subtitle && appInfo.options.length > 0 ? "Here are your options" : "No options available";
 };
 
-var getSubtitle = function getSubtitle(subtitle) {
-  return subtitle && appInfo.options.length > 0 ? React.createElement(
-    "p",
-    null,
-    "Here are your options"
-  ) : React.createElement(
-    "p",
-    null,
-    "No options"
-  );
-};
+var onFormSubmit = function onFormSubmit(e) {
+  // preventDefault() stops the form from re-rendering the page.
+  e.preventDefault();
 
-// ====================================================
-// Basics of Rendering
-// - Adding features together through conditional 
-//   rendering.
-// 
-// ====================================================
+  // e is the whole object
+  // target is the element that the event started on - in this case, the form
+  // form has access to elements, which has a list of elements in the form - listed by name
+  // This is why we called the input element "option"
+  // option has a value - the text typed into it before form submission by clicking the button
+  var option = e.target.elements.option.value;
 
-var template = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h2",
-    null,
-    appInfo.title
-  ),
-  getSubtitle(appInfo.subtitle),
-  React.createElement(
-    "ol",
-    null,
-    React.createElement(
-      "li",
-      null,
-      "Item One"
-    ),
-    React.createElement(
-      "li",
-      null,
-      "Item Two"
-    )
-  )
-);
-
-var user = {
-  name: "James Gardener",
-  age: 28,
-  location: "England"
-};
-var getName = function getName(name) {
-  return name ? React.createElement(
-    "p",
-    null,
-    "Name: ",
-    name
-  ) : React.createElement(
-    "p",
-    null,
-    "Anonymous"
-  );
-};
-var getAge = function getAge(age) {
-  return age && age >= 18 ? React.createElement(
-    "p",
-    null,
-    "Age: ",
-    age
-  ) : undefined;
-};
-var getLocation = function getLocation(location) {
-  return React.createElement(
-    "p",
-    null,
-    "Location: ",
-    location
-  );
-};
-
-var templateTwo = React.createElement(
-  "div",
-  null,
-  getName(user.name),
-  getAge(user.age),
-  getLocation(user.location)
-);
-
-// Challenge
-var getFirstName = function getFirstName(name) {
-  return console.log(name.split(' ')[0]);
-};
-getFirstName("Mike Smith");
-
-// Challenge
-var multiplier = {
-  numbers: [10, 20, 30],
-  multiplyBy: 3,
-  multiply: function multiply() {
-    var _this = this;
-
-    return this.numbers.map(function (number) {
-      return _this.multiplyBy * number;
-    });
+  // If the input field has text in it on form submission, then add that text to the options array
+  // Then, clear the text input, ready for another value to be added.
+  if (option) {
+    appInfo.options.push(option);
+    e.target.elements.option.value = "";
+    initialiseRerender();
   }
 };
 
-// =============================================
-//  Events + Data Binding
-//  
-//
-// =============================================
+var removeItems = function removeItems() {
+  appInfo.options = [];
+  initialiseRerender();
+};
 
-// Challenge 
-// Make a button called -1 - setup minus one function and register as onClick handler
-// return a console log with the count having been reduced by one. 
-// Make a second button called reset - set the reset function to return count as reset to 0.
-var count = 0;
-var addOne = function addOne() {
-  return console.log(count += 1);
-};
-var minusOne = function minusOne() {
-  return console.log(count -= 1);
-};
-var resetCount = function resetCount() {
-  console.log("Count reset successfully");count = 0;
-};
-var templateThree = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
+var initialiseRerender = function initialiseRerender() {
+  var template = React.createElement(
+    "div",
     null,
-    "Count: ",
-    count
-  ),
-  React.createElement(
-    "button",
-    { onClick: addOne },
-    "+1"
-  ),
-  React.createElement(
-    "button",
-    { onClick: minusOne },
-    "-1"
-  ),
-  React.createElement(
-    "button",
-    { onClick: resetCount },
-    "Reset"
-  )
-);
+    React.createElement(
+      "h1",
+      null,
+      appInfo.title
+    ),
+    appInfo.subtitle && React.createElement(
+      "p",
+      null,
+      appInfo.subtitle
+    ),
+    React.createElement(
+      "button",
+      { onClick: removeItems },
+      "Remove all"
+    ),
+    React.createElement(
+      "ol",
+      null,
+      React.createElement(
+        "li",
+        null,
+        "Item One"
+      ),
+      React.createElement(
+        "li",
+        null,
+        "Item Two"
+      ),
+      React.createElement(
+        "p",
+        null,
+        appInfo.options.length
+      )
+    ),
+    React.createElement(
+      "form",
+      { onSubmit: onFormSubmit },
+      React.createElement("input", { type: "text", name: "option", placeholder: "Enter information here..." }),
+      React.createElement(
+        "button",
+        null,
+        "Add Option"
+      )
+    )
+  );
 
-console.log(multiplier.multiply());
-var appRoot = document.getElementById('app');
+  ReactDOM.render(template, appRoot);
+};
 
-ReactDOM.render(templateThree, appRoot);
-// ReactDOM.render(templateTwo, appRoot);
+var appRoot = document.getElementById("app");
+initialiseRerender();
