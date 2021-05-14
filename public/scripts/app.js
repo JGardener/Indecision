@@ -25,10 +25,9 @@ var getSubtitle = function getSubtitle(subtitle) {
 };
 
 // ====================================================
-// 
-//    Basics of Rendering
-//    - Adding features together through conditional 
-//      rendering.
+// Basics of Rendering
+// - Adding features together through conditional 
+//   rendering.
 // 
 // ====================================================
 
@@ -119,12 +118,25 @@ var multiplier = {
 };
 
 // =============================================
-//
-//
+//  Events + Data Binding
+//  
 //
 // =============================================
 
+// Challenge 
+// Make a button called -1 - setup minus one function and register as onClick handler
+// return a console log with the count having been reduced by one. 
+// Make a second button called reset - set the reset function to return count as reset to 0.
 var count = 0;
+var addOne = function addOne() {
+  return console.log(count += 1);
+};
+var minusOne = function minusOne() {
+  return console.log(count -= 1);
+};
+var resetCount = function resetCount() {
+  console.log("Count reset successfully");count = 0;
+};
 var templateThree = React.createElement(
   "div",
   null,
@@ -136,8 +148,18 @@ var templateThree = React.createElement(
   ),
   React.createElement(
     "button",
-    { id: "my-id", className: "button" },
+    { onClick: addOne },
     "+1"
+  ),
+  React.createElement(
+    "button",
+    { onClick: minusOne },
+    "-1"
+  ),
+  React.createElement(
+    "button",
+    { onClick: resetCount },
+    "Reset"
   )
 );
 

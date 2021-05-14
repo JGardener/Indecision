@@ -14,10 +14,9 @@ const getSubtitle = (subtitle) => subtitle && appInfo.options.length > 0 ? <p>{"
 
 
 // ====================================================
-// 
-//    Basics of Rendering
-//    - Adding features together through conditional 
-//      rendering.
+// Basics of Rendering
+// - Adding features together through conditional 
+//   rendering.
 // 
 // ====================================================
 
@@ -66,20 +65,27 @@ const multiplier = {
 }
 
 // =============================================
-//
-//
+//  Events + Data Binding
+//  
 //
 // =============================================
 
+// Challenge 
+// Make a button called -1 - setup minus one function and register as onClick handler
+// return a console log with the count having been reduced by one. 
+// Make a second button called reset - set the reset function to return count as reset to 0.
 let count = 0;
+const addOne = () => console.log(count+= 1);
+const minusOne = () => console.log(count-=1);
+const resetCount = () => {console.log("Count reset successfully"); count = 0}; 
 const templateThree = (
   <div>
     <h1>Count: {count}</h1>
-    <button id="my-id" className="button">+1</button>
+    <button onClick={addOne}>+1</button>
+    <button onClick={minusOne}>-1</button>
+    <button onClick={resetCount}>Reset</button>
   </div>
 )
-
-
 
 console.log(multiplier.multiply());
 const appRoot = document.getElementById('app');
