@@ -13,12 +13,20 @@ const appInfo = {
 const getSubtitle = (subtitle) => subtitle && appInfo.options.length > 0 ? <p>{"Here are your options"}</p> : <p>{"No options"}</p>
 
 
+// ====================================================
+// 
+//    Basics of Rendering
+//    - Adding features together through conditional 
+//      rendering.
+// 
+// ====================================================
+
 const template = (
   <div>
     <h2>
       {appInfo.title}
     </h2>
-    <p>{getSubtitle(appInfo.subtitle)}</p>
+    {getSubtitle(appInfo.subtitle)}
     <ol>
       <li>Item One</li>
       <li>Item Two</li>
@@ -43,7 +51,38 @@ const templateTwo = (
   </div>
 );
 
+// Challenge
+const getFirstName = (name) => console.log(name.split(' ')[0]);
+getFirstName("Mike Smith");
+
+
+// Challenge
+const multiplier = {
+  numbers: [10, 20, 30],
+  multiplyBy: 3,
+  multiply() {
+    return this.numbers.map((number) => this.multiplyBy * number ); 
+  }
+}
+
+// =============================================
+//
+//
+//
+// =============================================
+
+let count = 0;
+const templateThree = (
+  <div>
+    <h1>Count: {count}</h1>
+    <button id="my-id" className="button">+1</button>
+  </div>
+)
+
+
+
+console.log(multiplier.multiply());
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateThree, appRoot);
 // ReactDOM.render(templateTwo, appRoot);

@@ -24,6 +24,14 @@ var getSubtitle = function getSubtitle(subtitle) {
   );
 };
 
+// ====================================================
+// 
+//    Basics of Rendering
+//    - Adding features together through conditional 
+//      rendering.
+// 
+// ====================================================
+
 var template = React.createElement(
   "div",
   null,
@@ -32,11 +40,7 @@ var template = React.createElement(
     null,
     appInfo.title
   ),
-  React.createElement(
-    "p",
-    null,
-    getSubtitle(appInfo.subtitle)
-  ),
+  getSubtitle(appInfo.subtitle),
   React.createElement(
     "ol",
     null,
@@ -95,7 +99,50 @@ var templateTwo = React.createElement(
   getLocation(user.location)
 );
 
+// Challenge
+var getFirstName = function getFirstName(name) {
+  return console.log(name.split(' ')[0]);
+};
+getFirstName("Mike Smith");
+
+// Challenge
+var multiplier = {
+  numbers: [10, 20, 30],
+  multiplyBy: 3,
+  multiply: function multiply() {
+    var _this = this;
+
+    return this.numbers.map(function (number) {
+      return _this.multiplyBy * number;
+    });
+  }
+};
+
+// =============================================
+//
+//
+//
+// =============================================
+
+var count = 0;
+var templateThree = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Count: ",
+    count
+  ),
+  React.createElement(
+    "button",
+    { id: "my-id", className: "button" },
+    "+1"
+  )
+);
+
+console.log(multiplier.multiply());
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateThree, appRoot);
 // ReactDOM.render(templateTwo, appRoot);
