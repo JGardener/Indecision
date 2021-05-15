@@ -6,7 +6,6 @@ const appInfo = {
   subtitle: "Application Subtitle",
   options: []
 }
-const getOptions = (subtitle) => subtitle && appInfo.options.length > 0 ? "Here are your options" : "No options available";   
 
 const onFormSubmit = (e) => {
   // preventDefault() stops the form from re-rendering the page.
@@ -18,7 +17,7 @@ const onFormSubmit = (e) => {
   // This is why we called the input element "option"
   // option has a value - the text typed into it before form submission by clicking the button
   const option = e.target.elements.option.value;
-
+  
   // If the input field has text in it on form submission, then add that text to the options array
   // Then, clear the text input, ready for another value to be added.
   if(option){
@@ -38,7 +37,7 @@ const initialiseRerender = () => {
   const template = (
     <div>
       <h1>{appInfo.title}</h1>
-      {appInfo.subtitle && <p>{appInfo.subtitle}</p>}
+      {appInfo.options.length > 0 ? <p>Here are your options</p> : <p>No options available</p>}
       <button onClick={removeItems}>Remove all</button>
       <ol>
         {/* This line is possible due to the formSubmit function above. */}

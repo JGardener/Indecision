@@ -8,9 +8,6 @@ var appInfo = {
   subtitle: "Application Subtitle",
   options: []
 };
-var getOptions = function getOptions(subtitle) {
-  return subtitle && appInfo.options.length > 0 ? "Here are your options" : "No options available";
-};
 
 var onFormSubmit = function onFormSubmit(e) {
   // preventDefault() stops the form from re-rendering the page.
@@ -46,10 +43,14 @@ var initialiseRerender = function initialiseRerender() {
       null,
       appInfo.title
     ),
-    appInfo.subtitle && React.createElement(
+    appInfo.options.length > 0 ? React.createElement(
       "p",
       null,
-      appInfo.subtitle
+      "Here are your options"
+    ) : React.createElement(
+      "p",
+      null,
+      "No options available"
     ),
     React.createElement(
       "button",
