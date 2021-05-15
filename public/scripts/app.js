@@ -59,21 +59,13 @@ var initialiseRerender = function initialiseRerender() {
     React.createElement(
       "ol",
       null,
-      React.createElement(
-        "li",
-        null,
-        "Item One"
-      ),
-      React.createElement(
-        "li",
-        null,
-        "Item Two"
-      ),
-      React.createElement(
-        "p",
-        null,
-        appInfo.options.length
-      )
+      appInfo.options.map(function (option) {
+        return React.createElement(
+          "li",
+          { key: option },
+          option
+        );
+      })
     ),
     React.createElement(
       "form",

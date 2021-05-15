@@ -41,9 +41,8 @@ const initialiseRerender = () => {
       {appInfo.subtitle && <p>{appInfo.subtitle}</p>}
       <button onClick={removeItems}>Remove all</button>
       <ol>
-        <li>Item One</li>
-        <li>Item Two</li>
-        <p>{appInfo.options.length}</p>
+        {/* This line is possible due to the formSubmit function above. */}
+        {appInfo.options.map((option) => <li key={option}>{option}</li>)}
       </ol>
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" placeholder="Enter information here..."/>
