@@ -1,98 +1,37 @@
 "use strict";
 
-console.log("app.js is running!");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-// Setting up a form
-var appInfo = {
-  title: "Indecision",
-  subtitle: "Application Subtitle",
-  options: []
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var onFormSubmit = function onFormSubmit(e) {
-  // preventDefault() stops the form from re-rendering the page.
-  e.preventDefault();
+var Person = function () {
+  function Person() {
+    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Anon";
+    var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-  // e is the whole object
-  // target is the element that the event started on - in this case, the form
-  // form has access to elements, which has a list of elements in the form - listed by name
-  // This is why we called the input element "option"
-  // option has a value - the text typed into it before form submission by clicking the button
-  var option = e.target.elements.option.value;
+    _classCallCheck(this, Person);
 
-  // If the input field has text in it on form submission, then add that text to the options array
-  // Then, clear the text input, ready for another value to be added.
-  if (option) {
-    appInfo.options.push(option);
-    e.target.elements.option.value = "";
-    initialiseRerender();
+    this.name = name;
+    this.age = age;
   }
-};
 
-var removeItems = function removeItems() {
-  appInfo.options = [];
-  initialiseRerender();
-};
+  _createClass(Person, [{
+    key: "getGreeting",
+    value: function getGreeting() {
+      return "Hello, " + this.name + "!";
+    }
+  }, {
+    key: "getDescription",
+    value: function getDescription() {
+      return this.name + " is " + this.age + " year(s) old.";
+    }
+  }]);
 
-var makeDecision = function makeDecision() {
-  var randomNumber = Math.floor(Math.random() * appInfo.options.length);
-  var decision = appInfo.options[randomNumber];
-  return alert(decision);
-};
+  return Person;
+}();
 
-var initialiseRerender = function initialiseRerender() {
-  var template = React.createElement(
-    "div",
-    null,
-    React.createElement(
-      "h1",
-      null,
-      appInfo.title
-    ),
-    appInfo.options.length > 0 ? React.createElement(
-      "p",
-      null,
-      "Here are your options"
-    ) : React.createElement(
-      "p",
-      null,
-      "No options available"
-    ),
-    React.createElement(
-      "button",
-      { disabled: appInfo.options.length == 0, onClick: makeDecision },
-      "What should I do?"
-    ),
-    React.createElement(
-      "ol",
-      null,
-      appInfo.options.map(function (option) {
-        return React.createElement(
-          "li",
-          { key: option },
-          option
-        );
-      })
-    ),
-    React.createElement(
-      "form",
-      { onSubmit: onFormSubmit },
-      React.createElement("input", { type: "text", name: "option", placeholder: "Enter information here..." }),
-      React.createElement(
-        "button",
-        null,
-        "Add Option"
-      ),
-      React.createElement(
-        "button",
-        { onClick: removeItems },
-        "Remove all"
-      )
-    )
-  );
+var me = new Person('James Gardener', 27);
+console.log(me.getDescription());
 
-  ReactDOM.render(template, appRoot);
-};
-
-var appRoot = document.getElementById("app");
-initialiseRerender();
+var other = new Person();
+console.log(other.getDescription());
