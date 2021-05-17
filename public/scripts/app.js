@@ -4,7 +4,7 @@ console.log("app.js is running!");
 
 // Setting up a form
 var appInfo = {
-  title: "Application Title",
+  title: "Indecision",
   subtitle: "Application Subtitle",
   options: []
 };
@@ -34,6 +34,12 @@ var removeItems = function removeItems() {
   initialiseRerender();
 };
 
+var makeDecision = function makeDecision() {
+  var randomNumber = Math.floor(Math.random() * appInfo.options.length);
+  var decision = appInfo.options[randomNumber];
+  return alert(decision);
+};
+
 var initialiseRerender = function initialiseRerender() {
   var template = React.createElement(
     "div",
@@ -54,8 +60,8 @@ var initialiseRerender = function initialiseRerender() {
     ),
     React.createElement(
       "button",
-      { onClick: removeItems },
-      "Remove all"
+      { disabled: appInfo.options.length == 0, onClick: makeDecision },
+      "What should I do?"
     ),
     React.createElement(
       "ol",
@@ -76,6 +82,11 @@ var initialiseRerender = function initialiseRerender() {
         "button",
         null,
         "Add Option"
+      ),
+      React.createElement(
+        "button",
+        { onClick: removeItems },
+        "Remove all"
       )
     )
   );

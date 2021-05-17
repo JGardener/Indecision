@@ -2,7 +2,7 @@ console.log("app.js is running!");
 
 // Setting up a form
 const appInfo = {
-  title: "Application Title",
+  title: "Indecision",
   subtitle: "Application Subtitle",
   options: []
 }
@@ -10,7 +10,7 @@ const appInfo = {
 const onFormSubmit = (e) => {
   // preventDefault() stops the form from re-rendering the page.
   e.preventDefault();
-  
+    
   // e is the whole object
   // target is the element that the event started on - in this case, the form
   // form has access to elements, which has a list of elements in the form - listed by name
@@ -33,12 +33,19 @@ const removeItems = () =>{
   initialiseRerender();
 };
 
+const makeDecision = () => {
+const randomNumber = Math.floor(Math.random() * appInfo.options.length);
+const decision = appInfo.options[randomNumber];
+return alert(decision);
+}
+
+
 const initialiseRerender = () => {
   const template = (
     <div>
       <h1>{appInfo.title}</h1>
       {appInfo.options.length > 0 ? <p>Here are your options</p> : <p>No options available</p>}
-      <button onClick={removeItems}>Remove all</button>
+      <button disabled={appInfo.options.length == 0} onClick={makeDecision}>What should I do?</button>
       <ol>
         {/* This line is possible due to the formSubmit function above. */}
         {appInfo.options.map((option) => <li key={option}>{option}</li>)}
@@ -46,6 +53,7 @@ const initialiseRerender = () => {
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" placeholder="Enter information here..."/>
         <button>Add Option</button>
+      <button onClick={removeItems}>Remove all</button>
       </form>
     </div>
   )
