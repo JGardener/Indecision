@@ -1,59 +1,53 @@
-class Person {
-  constructor(name = "Anon", age = 0) {
-   this.name = name
-   this.age = age
-  } 
-  getGreeting(){
-    return `Hello, ${this.name}!`
-  }
-  getDescription(){
-    return `${this.name} is ${this.age} year(s) old.`
+class Header extends React.Component {
+  render(){
+    return (
+      <div>
+        <h1>Indecision</h1>
+        <h2>Put your life in the hands of a computer.</h2>
+      </div>
+    )
   }
 }
 
-// A student is a person, obviously, but they will have their own properties. 
-// Extending Person means we get all the properties of Person, but we can add additional things to make it a Student
-class Student extends Person {
-  constructor(name, age, major){
-    super(name, age);
-    this.major = major
-  }
-  hasMajor(){
-    return !!this.major 
-  }
-  getDescription(){
-    let description = super.getDescription();
-    if(this.hasMajor()){
-      description += ` Their major is ${this.major}`
-    }
-    
-    return description
+class Action extends React.Component {
+  render(){
+    return (
+      <div>
+        <button>What should I do?</button>
+      </div>
+    );
   }
 }
 
-
-// Challenge
-class Traveler extends Person {
-  constructor(name, location){
-    super(name);
-    this.location = location
+class Options extends React.Component {
+  render(){
+    return (
+      <div>
+        <p>Options go here.</p>
+      </div>
+    );
   }
-  homeLocation(){
-    return this.location;
-  }
-  getGreeting(){
-    let greeting = super.getGreeting();
-    if(this.homeLocation()){
-      greeting += ` I'm visiting ${this.location}.`
-    }
-    return greeting;
-  }
-
 }
 
+class AddOption extends React.Component {
+  render(){
+    return (
+      <div>
+        <form action="#">
+          <p>This is where the form gets rendered</p>
+        </form>
+      </div>
+    );
+  }
+}
 
-const me = new Traveler('James Gardener', "England");
-console.log(me.getGreeting());
+const app = (
+  <div>
+    <Header />
+    <Action />
+    <Options />
+    <AddOption />
+  </div>
+)
 
-const other = new Traveler("James Gardener");
-console.log(other.getGreeting());
+ReactDOM.render(app, document.getElementById('app'))
