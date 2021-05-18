@@ -1,91 +1,71 @@
-class IndecisionApp extends React.Component {
-  render(){
-    const title = "Indecision";
-    const subtitle = "Put your life in the hands of a computer";
-    const options = ["One", "Two", "Four"];
-    return (
-      <div>
-        <Header title={title} subtitle={subtitle} />
-        <Action />
-        <Options options={options}/>
-        <AddOption />
-      </div>
-    );
-  }
-}
+class Counter extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleAddOne = this.handleAddOne.bind(this);
+    this.handleMinusOne = this.handleMinusOne.bind(this);
+    this.handleReset = this.handleReset.bind(this);
 
-class Header extends React.Component {
+    this.state = {
+      count: 0
+    };
+  }
+  handleAddOne(){
+    this.setState((prevState) => {
+      return {
+        count: prevState.count + 1
+      }
+    });
+  };
+  handleMinusOne(){
+    this.setState((prevState) => {
+      return {
+        count: prevState.count - 1
+      }
+    });
+  };
+  handleReset(){
+    this.setState(() => {
+      return {
+        count: 0
+      }
+    });
+  };
   render(){
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subtitle}</h2>
+        <h1>Count:{this.state.count}</h1>
+        <button onClick={this.handleAddOne}>+1</button>
+        <button onClick={this.handleMinusOne}>-1</button>
+        <button onClick={this.handleReset}>reset</button>
       </div>
     )
   }
 }
 
-class Action extends React.Component {
-  handlePick () {
-    alert("handlePick")
-  }
-  render(){
-    return (
-      <div>
-        <button onClick={this.handlePick}>What should I do?</button>
-      </div>
-    );
-  }
-}
-
-class Options extends React.Component {
+class VisibilityToggle extends React.Component {
   constructor(props){
     super(props);
-    this.handleRemoveAll = this.handleRemoveAll.bind(this);
-  }
-  handleRemoveAll () {
-    console.log(this.props.options)
-  }
-  render(){
-    return (
-      <div>
-        <p>Array length: {this.props.options.length}</p>
-        {this.props.options.map((option) => <Option key={option} optionText={option}/>)}
-        <button onClick={this.handleRemoveAll}>Remove All</button>
-      </div>
-    );
-  }
-}
-
-class Option extends React.Component {
-  render(){
-    return (
-      <div>
-        <p>Option: {this.props.optionText}</p>        
-      </div>
-    );
-  }
-}
-
-class AddOption extends React.Component {
-  handleAddOption(e) {
-    e.preventDefault();
-    const option = e.target.elements.option.value.trim();
-    if (option){
-      alert(option);
-      e.target.elements.option.value = "";
+    this.handleToggleInvisibility = this.handleToggleInvisibility.bind(this);
+    this.state = {
+      visibility: false
     }
   }
+  handleToggleInvisibility(){
+    this.setState((prevState) => {
+      return {
+          visibility: !prevState.visibility    
+      }});
+    }  
   render(){
     return (
       <div>
-        <form onSubmit={this.handleAddOption}>
-          <input type="text" name="option" />
-          <button>Add Option</button>
-        </form>
+        <button onClick={this.handleToggleInvisibility}>Toggle Details</button>
+        {console.log(this.state.visibility)}
+        <p>{!!this.state.visibility && this.props.text}</p>
+
       </div>
-    );
+    )
   }
 }
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+ReactDOM.render(<VisibilityToggle text={"These are some details!"}/>, document.getElementById('app'));
