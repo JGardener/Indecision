@@ -11,10 +11,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var IndecisionApp = function (_React$Component) {
   _inherits(IndecisionApp, _React$Component);
 
-  function IndecisionApp() {
+  function IndecisionApp(props) {
     _classCallCheck(this, IndecisionApp);
 
-    return _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+
+    _this.state = {
+      options: ["One", "Two", "Four"]
+    };
+    return _this;
   }
 
   _createClass(IndecisionApp, [{
@@ -22,13 +27,12 @@ var IndecisionApp = function (_React$Component) {
     value: function render() {
       var title = "Indecision";
       var subtitle = "Put your life in the hands of a computer";
-      var options = ["One", "Two", "Four"];
       return React.createElement(
         "div",
         null,
         React.createElement(Header, { title: title, subtitle: subtitle }),
-        React.createElement(Action, null),
-        React.createElement(Options, { options: options }),
+        React.createElement(Action, { options: this.state.options }),
+        React.createElement(Options, { options: this.state.options }),
         React.createElement(AddOption, null)
       );
     }
@@ -91,7 +95,10 @@ var Action = function (_React$Component3) {
         null,
         React.createElement(
           "button",
-          { onClick: this.handlePick },
+          {
+            disabled: this.props.options.length == 0,
+            onClick: this.handlePick
+          },
           "What should I do?"
         )
       );
