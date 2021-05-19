@@ -120,13 +120,21 @@ var VisibilityToggle = function (_React$Component2) {
         React.createElement(
           "button",
           { onClick: this.handleToggleInvisibility },
-          "Toggle Details"
+          this.state.visibility ? "Hide details" : "Show details"
         ),
         console.log(this.state.visibility),
         React.createElement(
           "p",
           null,
-          !!this.state.visibility && this.props.text
+          this.state.visibility && React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "p",
+              null,
+              "Here are some details!"
+            )
+          )
         )
       );
     }
@@ -135,4 +143,4 @@ var VisibilityToggle = function (_React$Component2) {
   return VisibilityToggle;
 }(React.Component);
 
-ReactDOM.render(React.createElement(VisibilityToggle, { text: "These are some details!" }), document.getElementById('app'));
+ReactDOM.render(React.createElement(VisibilityToggle, null), document.getElementById('app'));

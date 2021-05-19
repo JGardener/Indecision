@@ -59,13 +59,17 @@ class VisibilityToggle extends React.Component {
   render(){
     return (
       <div>
-        <button onClick={this.handleToggleInvisibility}>Toggle Details</button>
+        <button onClick={this.handleToggleInvisibility}>{this.state.visibility ? "Hide details" : "Show details"}</button>
         {console.log(this.state.visibility)}
-        <p>{!!this.state.visibility && this.props.text}</p>
+        <p>{this.state.visibility && (
+          <div>
+            <p>Here are some details!</p>
+          </div>
+        )}</p>
 
       </div>
     )
   }
 }
 
-ReactDOM.render(<VisibilityToggle text={"These are some details!"}/>, document.getElementById('app'));
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
