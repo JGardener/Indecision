@@ -1,18 +1,35 @@
 class IndecisionApp extends React.Component {
   constructor(props){
     super(props);
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    this.handleDecision = this.handleDecision.bind(this);
     this.state = {
       options: ["One","Two","Four"]
     }
   }
+
+  handleDeleteOptions(){
+    this.setState(() => {
+      return {
+        options: []
+      }
+    })
+  }
+
+  handleDecision(){
+    const randomNumber = Math.floor(Math.random() * this.state.options.length);
+    const decision = this.state.options[randomNumber];
+    return alert(decision);
+  }
+  
   render(){
     const title = "Indecision";
     const subtitle = "Put your life in the hands of a computer";
     return (
       <div>
         <Header title={title} subtitle={subtitle} />
-        <Action options={this.state.options}/>
-        <Options options={this.state.options}/>
+        <Action options={this.state.options} handleDecision={this.handleDecision}/>
+        <Options options={this.state.options} handleDeleteOptions={this.handleDeleteOptions}/>
         <AddOption />
       </div>
     );
@@ -31,15 +48,12 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-  handlePick () {
-    alert("handlePick")
-  }
   render(){
     return (
       <div>
         <button 
         disabled={this.props.options.length == 0}
-        onClick={this.handlePick}
+        onClick={this.props.handleDecision}
         >
           What should I do?
         </button>
@@ -49,19 +63,12 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
-  constructor(props){
-    super(props);
-    this.handleRemoveAll = this.handleRemoveAll.bind(this);
-  }
-  handleRemoveAll () {
-    console.log(this.props.options)
-  }
   render(){
     return (
       <div>
         <p>Array length: {this.props.options.length}</p>
         {this.props.options.map((option) => <Option key={option} optionText={option}/>)}
-        <button onClick={this.handleRemoveAll}>Remove All</button>
+        <button onClick={this.props.handleDeleteOptions}>Remove All</button>
       </div>
     );
   }
@@ -98,4 +105,4 @@ class AddOption extends React.Component {
   }
 }
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
