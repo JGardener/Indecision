@@ -8,160 +8,110 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IndecisionApp = function (_React$Component) {
-  _inherits(IndecisionApp, _React$Component);
+var Counter = function (_React$Component) {
+  _inherits(Counter, _React$Component);
 
-  function IndecisionApp(props) {
-    _classCallCheck(this, IndecisionApp);
+  function Counter(props) {
+    _classCallCheck(this, Counter);
 
-    var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
 
-    _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
-    _this.handleDecision = _this.handleDecision.bind(_this);
-    _this.handleAddOption = _this.handleAddOption.bind(_this);
+    _this.handleAddOne = _this.handleAddOne.bind(_this);
+    _this.handleMinusOne = _this.handleMinusOne.bind(_this);
+    _this.handleReset = _this.handleReset.bind(_this);
+
     _this.state = {
-      options: []
+      count: props.count
     };
     return _this;
   }
 
-  _createClass(IndecisionApp, [{
-    key: "handleDeleteOptions",
-    value: function handleDeleteOptions() {
-      this.setState(function () {
+  _createClass(Counter, [{
+    key: "handleAddOne",
+    value: function handleAddOne() {
+      this.setState(function (prevState) {
         return {
-          options: []
+          count: prevState.count + 1
         };
       });
     }
   }, {
-    key: "handleDecision",
-    value: function handleDecision() {
-      var randomNumber = Math.floor(Math.random() * this.state.options.length);
-      var decision = this.state.options[randomNumber];
-      return alert(decision);
-    }
-  }, {
-    key: "handleAddOption",
-    value: function handleAddOption(option) {
-      // Some error messages for the user, just in case.
-      // If there was no text in the first place. option comes out as false
-      if (!option) {
-        return "Please enter a valid value to add item";
-        // If the option already exists in the array. indexOf(option) > -1 means the item exists in the array 
-      } else if (this.state.options.indexOf(option) > -1) {
-        return "This option already exists";
-      }
+    key: "handleMinusOne",
+    value: function handleMinusOne() {
       this.setState(function (prevState) {
         return {
-          options: prevState.options.concat(option)
+          count: prevState.count - 1
+        };
+      });
+    }
+  }, {
+    key: "handleReset",
+    value: function handleReset() {
+      this.setState(function () {
+        return {
+          count: 5
         };
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var title = "Indecision";
-      var subtitle = "Put your life in the hands of a computer";
       return React.createElement(
         "div",
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
-        React.createElement(Action, { options: this.state.options, handleDecision: this.handleDecision }),
-        React.createElement(Options, { options: this.state.options, handleDeleteOptions: this.handleDeleteOptions }),
-        React.createElement(AddOption, { handleAddOption: this.handleAddOption })
+        React.createElement(
+          "h1",
+          null,
+          "Count:",
+          this.state.count
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.handleAddOne },
+          "+1"
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.handleMinusOne },
+          "-1"
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.handleReset },
+          "reset"
+        )
       );
     }
   }]);
 
-  return IndecisionApp;
+  return Counter;
 }(React.Component);
 
-var Header = function Header(props) {
-  return React.createElement(
-    "div",
-    null,
-    React.createElement(
-      "h1",
-      null,
-      props.title
-    ),
-    React.createElement(
-      "h2",
-      null,
-      props.subtitle
-    )
-  );
+Counter.defaultProps = {
+  count: 0
 };
 
-var Action = function Action(props) {
-  return React.createElement(
-    "div",
-    null,
-    React.createElement(
-      "button",
-      {
-        disabled: props.options.length == 0,
-        onClick: props.handleDecision
-      },
-      "What should I do?"
-    )
-  );
-};
+var VisibilityToggle = function (_React$Component2) {
+  _inherits(VisibilityToggle, _React$Component2);
 
-var Options = function Options(props) {
-  return React.createElement(
-    "div",
-    null,
-    props.options.map(function (option) {
-      return React.createElement(Option, { key: option, optionText: option });
-    }),
-    React.createElement(
-      "button",
-      { onClick: props.handleDeleteOptions },
-      "Remove All"
-    )
-  );
-};
+  function VisibilityToggle(props) {
+    _classCallCheck(this, VisibilityToggle);
 
-var Option = function Option(props) {
-  return React.createElement(
-    "div",
-    null,
-    React.createElement(
-      "p",
-      null,
-      "Option: ",
-      props.optionText
-    )
-  );
-};
+    var _this2 = _possibleConstructorReturn(this, (VisibilityToggle.__proto__ || Object.getPrototypeOf(VisibilityToggle)).call(this, props));
 
-var AddOption = function (_React$Component2) {
-  _inherits(AddOption, _React$Component2);
-
-  function AddOption(props) {
-    _classCallCheck(this, AddOption);
-
-    var _this2 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
-
-    _this2.handleAddOption = _this2.handleAddOption.bind(_this2);
+    _this2.handleToggleInvisibility = _this2.handleToggleInvisibility.bind(_this2);
     _this2.state = {
-      error: undefined
+      visibility: false
     };
     return _this2;
   }
 
-  _createClass(AddOption, [{
-    key: "handleAddOption",
-    value: function handleAddOption(e) {
-      e.preventDefault();
-      var option = e.target.elements.option.value.trim();
-      var error = this.props.handleAddOption(option);
-      e.target.elements.option.value = "";
-      this.setState(function () {
+  _createClass(VisibilityToggle, [{
+    key: "handleToggleInvisibility",
+    value: function handleToggleInvisibility() {
+      this.setState(function (prevState) {
         return {
-          error: error
+          visibility: !prevState.visibility
         };
       });
     }
@@ -171,44 +121,26 @@ var AddOption = function (_React$Component2) {
       return React.createElement(
         "div",
         null,
-        this.state.error && React.createElement(
-          "p",
-          null,
-          this.state.error
-        ),
         React.createElement(
-          "form",
-          { onSubmit: this.handleAddOption },
-          React.createElement("input", { type: "text", name: "option" }),
+          "button",
+          { onClick: this.handleToggleInvisibility },
+          this.state.visibility ? "Hide details" : "Show details"
+        ),
+        console.log(this.state.visibility),
+        this.state.visibility && React.createElement(
+          "div",
+          null,
           React.createElement(
-            "button",
+            "p",
             null,
-            "Add Option"
+            "Here are some details!"
           )
         )
       );
     }
   }]);
 
-  return AddOption;
+  return VisibilityToggle;
 }(React.Component);
 
-// Stateless functional components 
-// These don't manage state, but we can manage props.
-
-// Advantage - faster than class based components because they don't have to extend 
-// a React.Component, and they have nowhere near as much overhead.
-
-/*const User = (props) => {
-  return (
-    <div>
-      <p>Name: {props.name}</p>
-      <p>Age: {props.age}</p>
-    </div>
-  )
-}
-
-ReactDOM.render(<User name={"James"} age={28}/>, document.getElementById('app'));
-*/
-
-ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(Counter /*count={-10}*/, null), document.getElementById('app'));

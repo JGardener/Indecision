@@ -6,7 +6,7 @@ class Counter extends React.Component {
     this.handleReset = this.handleReset.bind(this);
 
     this.state = {
-      count: 0
+      count: props.count
     };
   }
   handleAddOne(){
@@ -26,7 +26,7 @@ class Counter extends React.Component {
   handleReset(){
     this.setState(() => {
       return {
-        count: 0
+        count: 5
       }
     });
   };
@@ -40,6 +40,10 @@ class Counter extends React.Component {
       </div>
     )
   }
+}
+
+Counter.defaultProps = {
+  count: 0
 }
 
 class VisibilityToggle extends React.Component {
@@ -61,15 +65,15 @@ class VisibilityToggle extends React.Component {
       <div>
         <button onClick={this.handleToggleInvisibility}>{this.state.visibility ? "Hide details" : "Show details"}</button>
         {console.log(this.state.visibility)}
-        <p>{this.state.visibility && (
+        {this.state.visibility && (
           <div>
             <p>Here are some details!</p>
           </div>
-        )}</p>
+        )}
 
       </div>
     )
   }
 }
 
-ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
+ReactDOM.render(<Counter /*count={-10}*//>, document.getElementById('app'));
