@@ -10,9 +10,28 @@ class IndecisionApp extends React.Component {
     }
   }
 
+  // Shows when a component gets rendered to the page for the first time.
+  componentDidMount(){
+    console.log("The component has mounted");
+  }
+
+  // Shows when a components props or state updates.
+  // Useful for figuring out when component data changed.
+  // Has access to the previous props and previous states.
+  componentDidUpdate(prevProps, prevState){
+    console.log("The component has been updated")
+  }
+
+  // Shows when a component goes away
+  // There's usually not much use for this function, but it's useful to know.
+  componentWillUnmount(){
+    console.log("Component will unmount")
+  }
+
   handleDeleteOptions(){
     this.setState(() => ({ options: [] }))
   }
+
 
   handleDecision(){
     const randomNumber = Math.floor(Math.random() * this.state.options.length);
@@ -33,10 +52,7 @@ class IndecisionApp extends React.Component {
   }
 
   handleDeleteOption(optionToRemove){
-    this.setState((prevState) => ({
-      options: prevState.options.filter((option) => optionToRemove !== option )
-    }))
-    
+    this.setState((prevState) => ({options: prevState.options.filter((option) => optionToRemove !== option )}));
   }
 
   render(){

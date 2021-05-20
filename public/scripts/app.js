@@ -26,7 +26,34 @@ var IndecisionApp = function (_React$Component) {
     return _this;
   }
 
+  // Shows when a component gets rendered to the page for the first time.
+
+
   _createClass(IndecisionApp, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log("The component has mounted");
+    }
+
+    // Shows when a components props or state updates.
+    // Useful for figuring out when component data changed.
+    // Has access to the previous props and previous states.
+
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      console.log("The component has been updated");
+    }
+
+    // Shows when a component goes away
+    // There's usually not much use for this function, but it's useful to know.
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      console.log("Component will unmount");
+    }
+  }, {
     key: "handleDeleteOptions",
     value: function handleDeleteOptions() {
       this.setState(function () {
@@ -59,11 +86,9 @@ var IndecisionApp = function (_React$Component) {
     key: "handleDeleteOption",
     value: function handleDeleteOption(optionToRemove) {
       this.setState(function (prevState) {
-        return {
-          options: prevState.options.filter(function (option) {
+        return { options: prevState.options.filter(function (option) {
             return optionToRemove !== option;
-          })
-        };
+          }) };
       });
     }
   }, {
