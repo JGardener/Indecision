@@ -4,17 +4,14 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handleDecision = this.handleDecision.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
       options: []
     }
   }
 
   handleDeleteOptions(){
-    this.setState(() => {
-      return {
-        options: []
-      }
-    })
+    this.setState(() => ({ options: [] }))
   }
 
   handleDecision(){
@@ -32,20 +29,35 @@ class IndecisionApp extends React.Component {
     } else if (this.state.options.indexOf(option) > -1){
       return "This option already exists";
     } 
-    this.setState((prevState) => {
-      return {
-        options: prevState.options.concat(option)
-      };
-    });
+    this.setState((prevState) => ({options: prevState.options.concat(option)}))
   }
+
+  handleDeleteOption(optionToRemove){
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => optionToRemove !== option )
+    }))
+    
+  }
+
   render(){
     const subtitle = "Put your life in the hands of a computer";
     return (
       <div>
-        <Header subtitle={subtitle} />
-        <Action options={this.state.options} handleDecision={this.handleDecision}/>
-        <Options options={this.state.options} handleDeleteOptions={this.handleDeleteOptions}/>
-        <AddOption handleAddOption={this.handleAddOption}/>
+        <Header 
+        subtitle={subtitle} 
+        />
+        <Action 
+        options={this.state.options} 
+        handleDecision={this.handleDecision}
+        />
+        <Options 
+        options={this.state.options} 
+        handleDeleteOptions={this.handleDeleteOptions}
+        handleDeleteOption={this.handleDeleteOption}
+        />
+        <AddOption 
+        handleAddOption={this.handleAddOption}
+        />
       </div>
     );
   }
@@ -81,7 +93,12 @@ const Action = (props) => {
 const Options = (props) => {
   return (
     <div>
-      {props.options.map((option) => <Option key={option} optionText={option}/>)}
+      {props.options.map((option) => (
+      <Option 
+      key={option} 
+      optionText={option} 
+      handleDeleteOption={props.handleDeleteOption}
+      />))}
       <button onClick={props.handleDeleteOptions}>Remove All</button>
     </div>
   );
@@ -90,7 +107,15 @@ const Options = (props) => {
 const Option = (props) => {
   return (
       <div>
-        <p>Option: {props.optionText}</p>        
+        <p>Option: {props.optionText}</p>
+          <button 
+            onClick={(e) => {
+              props.handleDeleteOption(props.optionText);
+            }}
+            >
+              Remove
+          </button>
+                
       </div>
     );
 }
@@ -108,11 +133,7 @@ class AddOption extends React.Component {
     const option = e.target.elements.option.value.trim();
     const error = this.props.handleAddOption(option);
     e.target.elements.option.value = "";
-    this.setState(() => {
-      return {
-        error: error
-      }
-    })
+    this.setState(() => ({error: error}))
   }
   render(){
     return (
@@ -129,6 +150,7 @@ class AddOption extends React.Component {
 
 // Stateless functional components 
 // These don't manage state, but we can manage props.
+// Remember, these don't have the 'this' keyword, so don't bother with it
 
 // Advantage - faster than class based components because they don't have to extend 
 // a React.Component, and they have nowhere near as much overhead.
