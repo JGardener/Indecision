@@ -12,17 +12,27 @@ class IndecisionApp extends React.Component {
 
   // Shows when a component gets rendered to the page for the first time.
   componentDidMount(){
-    console.log("The component has mounted");
+    try {
+      const json = localStorage.getItem("options")
+      const options = JSON.parse(json);
+      this.setState(() => ({options}));
+    } catch (e) {
+      // Do nothing at all!
+    }
   }
 
   // Shows when a components props or state updates.
   // Useful for figuring out when component data changed.
   // Has access to the previous props and previous states.
   componentDidUpdate(prevProps, prevState){
-    console.log("The component has been updated")
+    if(prevState.options.length !== this.state.options.length){
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem("options", json)
+      console.log("You updated data")
+    }
   }
 
-  // Shows when a component goes away
+  // Shows when a component gets removed from the DOM.
   // There's usually not much use for this function, but it's useful to know.
   componentWillUnmount(){
     console.log("Component will unmount")
@@ -109,6 +119,7 @@ const Action = (props) => {
 const Options = (props) => {
   return (
     <div>
+      {props.options.length === 0 && <p>Please add an item to get started!</p> }
       {props.options.map((option) => (
       <Option 
       key={option} 

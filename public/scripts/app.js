@@ -32,7 +32,15 @@ var IndecisionApp = function (_React$Component) {
   _createClass(IndecisionApp, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log("The component has mounted");
+      try {
+        var json = localStorage.getItem("options");
+        var options = JSON.parse(json);
+        this.setState(function () {
+          return { options: options };
+        });
+      } catch (e) {
+        // Do nothing at all!
+      }
     }
 
     // Shows when a components props or state updates.
@@ -42,10 +50,14 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
-      console.log("The component has been updated");
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem("options", json);
+        console.log("You updated data");
+      }
     }
 
-    // Shows when a component goes away
+    // Shows when a component gets removed from the DOM.
     // There's usually not much use for this function, but it's useful to know.
 
   }, {
@@ -160,6 +172,11 @@ var Options = function Options(props) {
   return React.createElement(
     "div",
     null,
+    props.options.length === 0 && React.createElement(
+      "p",
+      null,
+      "Please add an item to get started!"
+    ),
     props.options.map(function (option) {
       return React.createElement(Option, {
         key: option,
