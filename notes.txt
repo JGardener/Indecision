@@ -1,0 +1,20 @@
+Webpack notes: 
+
+- Definitions usually leave a lot to be desired.
+- A modular bundle for modern Javascript apps. - this doesn't really help much in terms of defining Webpack
+
+
+- It allows us to organise our JS. 
+Run the app through Webpack, and it spits out ONE JS file with everything in it. 
+
+Rather than adding script tags forever-more into the public/index.html
+We can use Webpack instead! 
+
+Webpack breaks up your JS files, turns them into "islands" which can communicate
+with each other via the ES6 "import" and "export" syntax. 
+
+This means we can break out all of our React components into individual files, 
+rather than having them all bundled together in one "app.js" file. 
+
+app.js will simply import all the components needed and render them to the screen. Easy.
+

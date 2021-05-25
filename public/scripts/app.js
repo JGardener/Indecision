@@ -81,7 +81,7 @@ var Counter = function (_React$Component) {
         React.createElement(
           'h1',
           null,
-          'Count:',
+          'Count: ',
           this.state.count
         ),
         React.createElement(
