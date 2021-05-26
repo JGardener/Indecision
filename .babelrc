@@ -1,0 +1,10 @@
+// A configuration file for Babel
+// This is all JSON!
+
+{
+  "presets": [
+    "env", 
+    "react"
+  ] 
+}
+
