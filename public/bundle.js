@@ -258,21 +258,6 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(17);
-} else {
-  module.exports = __webpack_require__(18);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
 /**
@@ -311,7 +296,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -408,7 +393,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -432,7 +417,7 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -489,6 +474,21 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(17);
+} else {
+  module.exports = __webpack_require__(18);
+}
+
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
@@ -674,7 +674,7 @@ module.exports = ExecutionEnvironment;
 
 
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(1);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -744,7 +744,7 @@ module.exports = warning;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(1);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -1017,9 +1017,7 @@ if (process.env.NODE_ENV === 'production') {
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -1027,157 +1025,13 @@ var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Header = __webpack_require__(35);
+var _IndecisionApp = __webpack_require__(35);
 
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Action = __webpack_require__(36);
-
-var _Action2 = _interopRequireDefault(_Action);
-
-var _Options = __webpack_require__(37);
-
-var _Options2 = _interopRequireDefault(_Options);
-
-var _AddOption = __webpack_require__(39);
-
-var _AddOption2 = _interopRequireDefault(_AddOption);
+var _IndecisionApp2 = _interopRequireDefault(_IndecisionApp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var IndecisionApp = function (_React$Component) {
-  _inherits(IndecisionApp, _React$Component);
-
-  function IndecisionApp(props) {
-    _classCallCheck(this, IndecisionApp);
-
-    var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
-
-    _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
-    _this.handleDecision = _this.handleDecision.bind(_this);
-    _this.handleAddOption = _this.handleAddOption.bind(_this);
-    _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
-    _this.state = {
-      options: []
-    };
-    return _this;
-  }
-
-  // Shows when a component gets rendered to the page for the first time.
-
-
-  _createClass(IndecisionApp, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      try {
-        var json = localStorage.getItem("options");
-        var options = JSON.parse(json);
-        if (options) {
-          this.setState(function () {
-            return { options: options };
-          });
-        }
-      } catch (e) {
-        // Do nothing at all!
-      }
-    }
-
-    // Shows when a components props or state updates.
-    // Useful for figuring out when component data changed.
-    // Has access to the previous props and previous states.
-
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (prevState.options.length !== this.state.options.length) {
-        var json = JSON.stringify(this.state.options);
-        localStorage.setItem("options", json);
-        console.log("You updated data");
-      }
-    }
-
-    // Shows when a component gets removed from the DOM.
-    // There's usually not much use for this function, but it's useful to know.
-
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      console.log("Component will unmount");
-    }
-  }, {
-    key: 'handleDeleteOptions',
-    value: function handleDeleteOptions() {
-      this.setState(function () {
-        return { options: [] };
-      });
-    }
-  }, {
-    key: 'handleDecision',
-    value: function handleDecision() {
-      var randomNumber = Math.floor(Math.random() * this.state.options.length);
-      var decision = this.state.options[randomNumber];
-      return alert(decision);
-    }
-  }, {
-    key: 'handleAddOption',
-    value: function handleAddOption(option) {
-      // Some error messages for the user, just in case.
-      // If there was no text in the first place. option comes out as false
-      if (!option) {
-        return "Please enter a valid value to add item";
-        // If the option already exists in the array. indexOf(option) > -1 means the item exists in the array 
-      } else if (this.state.options.indexOf(option) > -1) {
-        return "This option already exists";
-      }
-      this.setState(function (prevState) {
-        return { options: prevState.options.concat(option) };
-      });
-    }
-  }, {
-    key: 'handleDeleteOption',
-    value: function handleDeleteOption(optionToRemove) {
-      this.setState(function (prevState) {
-        return { options: prevState.options.filter(function (option) {
-            return optionToRemove !== option;
-          }) };
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var subtitle = "Put your life in the hands of a computer";
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Header2.default, {
-          subtitle: subtitle
-        }),
-        _react2.default.createElement(_Action2.default, {
-          options: this.state.options,
-          handleDecision: this.handleDecision
-        }),
-        _react2.default.createElement(_Options2.default, {
-          options: this.state.options,
-          handleDeleteOptions: this.handleDeleteOptions,
-          handleDeleteOption: this.handleDeleteOption
-        }),
-        _react2.default.createElement(_AddOption2.default, {
-          handleAddOption: this.handleAddOption
-        })
-      );
-    }
-  }]);
-
-  return IndecisionApp;
-}(_react2.default.Component);
-
-_reactDom2.default.render(_react2.default.createElement(IndecisionApp, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_IndecisionApp2.default, null), document.getElementById('app'));
 
 /***/ }),
 /* 17 */
@@ -1193,7 +1047,7 @@ _reactDom2.default.render(_react2.default.createElement(IndecisionApp, null), do
  This source code is licensed under the MIT license found in the
  LICENSE file in the root directory of this source tree.
 */
-var f=__webpack_require__(3),p=__webpack_require__(4);__webpack_require__(5);var r=__webpack_require__(2);
+var f=__webpack_require__(2),p=__webpack_require__(3);__webpack_require__(4);var r=__webpack_require__(1);
 function t(a){for(var b=arguments.length-1,d="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,e=0;e<b;e++)d+="\x26args[]\x3d"+encodeURIComponent(arguments[e+1]);b=Error(d+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var u={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function v(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}v.prototype.isReactComponent={};v.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?t("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};v.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function w(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}function x(){}x.prototype=v.prototype;var y=w.prototype=new x;y.constructor=w;f(y,v.prototype);y.isPureReactComponent=!0;function z(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}var A=z.prototype=new x;A.constructor=z;f(A,v.prototype);A.unstable_isAsyncReactComponent=!0;A.render=function(){return this.props.children};
@@ -1230,11 +1084,11 @@ if (process.env.NODE_ENV !== "production") {
 
 'use strict';
 
-var objectAssign$1 = __webpack_require__(3);
+var objectAssign$1 = __webpack_require__(2);
 var require$$0 = __webpack_require__(9);
-var emptyObject = __webpack_require__(4);
-var invariant = __webpack_require__(5);
-var emptyFunction = __webpack_require__(2);
+var emptyObject = __webpack_require__(3);
+var invariant = __webpack_require__(4);
+var emptyFunction = __webpack_require__(1);
 var checkPropTypes = __webpack_require__(6);
 
 /**
@@ -2976,7 +2830,7 @@ if (process.env.NODE_ENV === 'production') {
  LICENSE file in the root directory of this source tree.
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1);__webpack_require__(5);var l=__webpack_require__(8),n=__webpack_require__(3),ba=__webpack_require__(10),ca=__webpack_require__(2),da=__webpack_require__(4),ea=__webpack_require__(11),fa=__webpack_require__(12),ha=__webpack_require__(13),ia=__webpack_require__(14);
+var aa=__webpack_require__(5);__webpack_require__(4);var l=__webpack_require__(8),n=__webpack_require__(2),ba=__webpack_require__(10),ca=__webpack_require__(1),da=__webpack_require__(3),ea=__webpack_require__(11),fa=__webpack_require__(12),ha=__webpack_require__(13),ia=__webpack_require__(14);
 function w(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:w("227");
 function ja(a){switch(a){case "svg":return"http://www.w3.org/2000/svg";case "math":return"http://www.w3.org/1998/Math/MathML";default:return"http://www.w3.org/1999/xhtml"}}
 var ka={Namespaces:{html:"http://www.w3.org/1999/xhtml",mathml:"http://www.w3.org/1998/Math/MathML",svg:"http://www.w3.org/2000/svg"},getIntrinsicNamespace:ja,getChildNamespace:function(a,b){return null==a||"http://www.w3.org/1999/xhtml"===a?ja(b):"http://www.w3.org/2000/svg"===a&&"foreignObject"===b?"http://www.w3.org/1999/xhtml":a}},la=null,oa={};
@@ -3301,18 +3155,18 @@ if (process.env.NODE_ENV !== "production") {
 
 'use strict';
 
-var react = __webpack_require__(1);
-var invariant = __webpack_require__(5);
+var react = __webpack_require__(5);
+var invariant = __webpack_require__(4);
 var ExecutionEnvironment = __webpack_require__(8);
-var _assign = __webpack_require__(3);
+var _assign = __webpack_require__(2);
 var EventListener = __webpack_require__(10);
 var require$$0 = __webpack_require__(9);
 var hyphenateStyleName = __webpack_require__(24);
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(1);
 var camelizeStyleName = __webpack_require__(26);
 var performanceNow = __webpack_require__(28);
 var propTypes = __webpack_require__(30);
-var emptyObject = __webpack_require__(4);
+var emptyObject = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(6);
 var shallowEqual = __webpack_require__(11);
 var containsNode = __webpack_require__(12);
@@ -20980,7 +20834,7 @@ exports.typeOf = typeOf;
 
 
 var ReactIs = __webpack_require__(15);
-var assign = __webpack_require__(3);
+var assign = __webpack_require__(2);
 
 var ReactPropTypesSecret = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(6);
@@ -21646,7 +21500,176 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(1);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Header = __webpack_require__(36);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Action = __webpack_require__(37);
+
+var _Action2 = _interopRequireDefault(_Action);
+
+var _Options = __webpack_require__(38);
+
+var _Options2 = _interopRequireDefault(_Options);
+
+var _AddOption = __webpack_require__(40);
+
+var _AddOption2 = _interopRequireDefault(_AddOption);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IndecisionApp = function (_React$Component) {
+  _inherits(IndecisionApp, _React$Component);
+
+  function IndecisionApp(props) {
+    _classCallCheck(this, IndecisionApp);
+
+    var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+
+    _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
+    _this.handleDecision = _this.handleDecision.bind(_this);
+    _this.handleAddOption = _this.handleAddOption.bind(_this);
+    _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
+    _this.state = {
+      options: []
+    };
+    return _this;
+  }
+
+  // Shows when a component gets rendered to the page for the first time.
+
+
+  _createClass(IndecisionApp, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      try {
+        var json = localStorage.getItem("options");
+        var options = JSON.parse(json);
+        if (options) {
+          this.setState(function () {
+            return { options: options };
+          });
+        }
+      } catch (e) {
+        // Do nothing at all!
+      }
+    }
+
+    // Shows when a components props or state updates.
+    // Useful for figuring out when component data changed.
+    // Has access to the previous props and previous states.
+
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem("options", json);
+        console.log("You updated data");
+      }
+    }
+
+    // Shows when a component gets removed from the DOM.
+    // There's usually not much use for this function, but it's useful to know.
+
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      console.log("Component will unmount");
+    }
+  }, {
+    key: 'handleDeleteOptions',
+    value: function handleDeleteOptions() {
+      this.setState(function () {
+        return { options: [] };
+      });
+    }
+  }, {
+    key: 'handleDecision',
+    value: function handleDecision() {
+      var randomNumber = Math.floor(Math.random() * this.state.options.length);
+      var decision = this.state.options[randomNumber];
+      return alert(decision);
+    }
+  }, {
+    key: 'handleAddOption',
+    value: function handleAddOption(option) {
+      // Some error messages for the user, just in case.
+      // If there was no text in the first place. option comes out as false
+      if (!option) {
+        return "Please enter a valid value to add item";
+        // If the option already exists in the array. indexOf(option) > -1 means the item exists in the array 
+      } else if (this.state.options.indexOf(option) > -1) {
+        return "This option already exists";
+      }
+      this.setState(function (prevState) {
+        return { options: prevState.options.concat(option) };
+      });
+    }
+  }, {
+    key: 'handleDeleteOption',
+    value: function handleDeleteOption(optionToRemove) {
+      this.setState(function (prevState) {
+        return { options: prevState.options.filter(function (option) {
+            return optionToRemove !== option;
+          }) };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var subtitle = "Put your life in the hands of a computer";
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_Header2.default, {
+          subtitle: subtitle
+        }),
+        _react2.default.createElement(_Action2.default, {
+          options: this.state.options,
+          handleDecision: this.handleDecision
+        }),
+        _react2.default.createElement(_Options2.default, {
+          options: this.state.options,
+          handleDeleteOptions: this.handleDeleteOptions,
+          handleDeleteOption: this.handleDeleteOption
+        }),
+        _react2.default.createElement(_AddOption2.default, {
+          handleAddOption: this.handleAddOption
+        })
+      );
+    }
+  }]);
+
+  return IndecisionApp;
+}(_react2.default.Component);
+
+exports.default = IndecisionApp;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -21672,7 +21695,7 @@ var Header = function Header(props) {
 exports.default = Header;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21682,7 +21705,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -21706,7 +21729,7 @@ var Action = function Action(props) {
 exports.default = Action;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21716,11 +21739,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Option = __webpack_require__(38);
+var _Option = __webpack_require__(39);
 
 var _Option2 = _interopRequireDefault(_Option);
 
@@ -21753,7 +21776,7 @@ var Options = function Options(props) {
 exports.default = Options;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21763,7 +21786,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -21794,7 +21817,7 @@ var Option = function Option(props) {
 exports.default = Option;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21806,7 +21829,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
