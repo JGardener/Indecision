@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Action from './components/Action';
 import Options from './components/Options';
 import AddOption from './components/AddOption';
-import Option from './components/Option';
 
 class IndecisionApp extends React.Component {
   constructor(props){
