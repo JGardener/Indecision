@@ -6,17 +6,36 @@ import Options from './Options';
 import AddOption from './AddOption';
 
 class IndecisionApp extends React.Component {
-  constructor(props){
-    super(props);
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handleDecision = this.handleDecision.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-    this.state = {
-      options: []
-    }
+  state = {
+    options: []
   }
   
+  handleDeleteOptions = () => {
+    this.setState(() => ({ options: [] }))
+  }
+
+
+  handleDecision = () => {
+    const randomNumber = Math.floor(Math.random() * this.state.options.length);
+    const decision = this.state.options[randomNumber];
+    return alert(decision);
+  }
+
+  handleAddOption = (option) => {
+    // Some error messages for the user, just in case.
+    // If there was no text in the first place. option comes out as false
+    if(!option){
+      return "Please enter a valid value to add item";
+    // If the option already exists in the array. indexOf(option) > -1 means the item exists in the array 
+    } else if (this.state.options.indexOf(option) > -1){
+      return "This option already exists";
+    } 
+    this.setState((prevState) => ({options: prevState.options.concat(option)}))
+  }
+
+  handleDeleteOption = (optionToRemove) => {
+    this.setState((prevState) => ({options: prevState.options.filter((option) => optionToRemove !== option )}));
+  }
   // Shows when a component gets rendered to the page for the first time.
   componentDidMount(){
     try {
@@ -29,7 +48,7 @@ class IndecisionApp extends React.Component {
       // Do nothing at all!
     }
   }
-
+  
   // Shows when a components props or state updates.
   // Useful for figuring out when component data changed.
   // Has access to the previous props and previous states.
@@ -47,32 +66,6 @@ class IndecisionApp extends React.Component {
     console.log("Component will unmount")
   }
 
-  handleDeleteOptions(){
-    this.setState(() => ({ options: [] }))
-  }
-
-
-  handleDecision(){
-    const randomNumber = Math.floor(Math.random() * this.state.options.length);
-    const decision = this.state.options[randomNumber];
-    return alert(decision);
-  }
-
-  handleAddOption(option){
-    // Some error messages for the user, just in case.
-    // If there was no text in the first place. option comes out as false
-    if(!option){
-      return "Please enter a valid value to add item";
-    // If the option already exists in the array. indexOf(option) > -1 means the item exists in the array 
-    } else if (this.state.options.indexOf(option) > -1){
-      return "This option already exists";
-    } 
-    this.setState((prevState) => ({options: prevState.options.concat(option)}))
-  }
-
-  handleDeleteOption(optionToRemove){
-    this.setState((prevState) => ({options: prevState.options.filter((option) => optionToRemove !== option )}));
-  }
 
   render(){
     const subtitle = "Put your life in the hands of a computer";
