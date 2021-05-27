@@ -17,8 +17,9 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/
     }]
-  }
-}
+  },
+  devtool: 'cheap-module-eval-source-map'
+};
 
 // Gotta teach Webpack how to compile JSX code into normal JS code
 // To do this, you need loaders. 
