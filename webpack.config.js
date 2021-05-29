@@ -19,7 +19,8 @@ module.exports = {
      exclude: /node_modules/
     },
     {
-     test: /\.scss$/,
+      // The ? in here means the s is optional. So we can support scss and css files
+     test: /\.s?css$/,
      use: [
       "style-loader",
       "css-loader",
