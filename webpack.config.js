@@ -11,12 +11,22 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    rules: [{
-      loader: 'babel-loader',
-      // test checks whether a file ends in .js or not.
-      test: /\.js$/,
-      exclude: /node_modules/
-    }]
+    rules: [
+    {
+     loader: 'babel-loader',
+     // test checks whether a file ends in .js or not. $ checks the end.
+     test: /\.js$/,
+     exclude: /node_modules/
+    },
+    {
+     test: /\.scss$/,
+     use: [
+      "style-loader",
+      "css-loader",
+      "sass-loader"
+      ]
+    }
+  ]
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
