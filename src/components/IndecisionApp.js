@@ -80,6 +80,7 @@ class IndecisionApp extends React.Component {
         <Header 
         subtitle={subtitle} 
         />
+        <div className="container">
         <Action 
         options={this.state.options} 
         handleDecision={this.handleDecision}
@@ -92,6 +93,7 @@ class IndecisionApp extends React.Component {
         <AddOption 
         handleAddOption={this.handleAddOption}
         />
+        </div>
         <OptionModal 
         selectedOption={this.state.selectedOption}
         handleClearSelectedOption={this.handleClearSelectedOption}/>
