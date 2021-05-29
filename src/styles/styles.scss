@@ -1,6 +1,10 @@
 @import "./base/settings";
 @import "./base/base";
+
+@import "./components/AddOption";
 @import "./components/Button";
 @import "./components/Container";
 @import "./components/Header";
+@import "./components/Modal";
+@import "./components/Option";
 @import "./components/Widget";
